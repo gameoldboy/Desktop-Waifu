@@ -24,12 +24,14 @@ Shader "DesktopMascotMaker/MascotMakerShader"
 				fixed4 frag(v2f_img i):COLOR
 				{
 					half4 input = tex2D(_MainTex, i.uv);
+					input.a = max((input.r+input.g+input.b)/3,input.a);
 
 					//half3 output = (input.rrr * half3(0,0,1))
 					//			 + (input.ggg * half3(0,1,0))
 					//			 + (input.bbb * half3(1,0,0));
 					//return fixed4(output, input.a);
 					
+					// return fixed4(input.aaa,1);
 					return input;
 				}
 

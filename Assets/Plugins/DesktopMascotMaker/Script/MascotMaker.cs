@@ -685,12 +685,12 @@ namespace DesktopMascotMaker
         private void Awake()
         {
             this.CheckInstance();
-            if (MascotMaker.mainWindowHandle == IntPtr.Zero)
-            {
-                Process currentProcess = Process.GetCurrentProcess();
-                MascotMaker.SetForegroundWindow(currentProcess.Handle);
-                MascotMaker.mainWindowHandle = MascotMaker.GetActiveWindow();
-            }
+            // if (MascotMaker.mainWindowHandle == IntPtr.Zero)
+            // {
+            //     Process currentProcess = Process.GetCurrentProcess();
+            //     MascotMaker.SetForegroundWindow(currentProcess.Handle);
+            //     MascotMaker.mainWindowHandle = MascotMaker.GetActiveWindow();
+            // }
             this.cam = base.transform.GetComponent<Camera>();
             this.rend = base.transform.GetComponent<Renderer>();
             this.cam.clearFlags = CameraClearFlags.Color;

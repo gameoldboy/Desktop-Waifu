@@ -2,10 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DesktopMascotMaker;
+using System;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 public class DanceController : MonoBehaviour
 {
+    struct LPRECT
+    {
+        public int left;
+        public int top;
+        public int right;
+        public int bottom;
+    }
+
+    [DllImport("user32.dll")]
+    static extern bool GetWindowRect(IntPtr hWnd, out LPRECT lpRect);
 
     public Transform View;
     public Transform FollowBone;
@@ -14,8 +26,9 @@ public class DanceController : MonoBehaviour
     void Start()
     {
         StartCoroutine(StartPlay());
-        // StartCoroutine(SetCharCenter());
+#if !UNITY_EDITOR
         SetCharCenter();
+#endif
         View.position = new Vector3(FollowBone.position.x, 0.9f, FollowBone.position.z);
     }
 
@@ -28,9 +41,10 @@ public class DanceController : MonoBehaviour
 
     void SetCharCenter()
     {
-        var width = Screen.resolutions[Screen.resolutions.Length - 1].width;
-        var height = Screen.resolutions[Screen.resolutions.Length - 1].height;
-        MascotMaker.Instance.Location = new Point(width / 2 - 300, height / 2 - 400);
+        GetWindowRect(Launcher.MainWindowHandle, out LPRECT lpRect);
+        var x = lpRect.left + (lpRect.right - lpRect.left) / 2;
+        var y = lpRect.top + (lpRect.bottom - lpRect.top) / 2;
+        MascotMaker.Instance.Location = new Point(x - 300, y - 400);
     }
 
     // Update is called once per frame

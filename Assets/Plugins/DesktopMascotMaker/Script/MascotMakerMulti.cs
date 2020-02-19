@@ -661,12 +661,12 @@ namespace DesktopMascotMaker
         // Token: 0x060000B9 RID: 185 RVA: 0x00004364 File Offset: 0x00002564
         private void Awake()
         {
-            if (MascotMakerMulti.mainWindowHandle == IntPtr.Zero)
-            {
-                Process currentProcess = Process.GetCurrentProcess();
-                MascotMakerMulti.SetForegroundWindow(currentProcess.Handle);
-                MascotMakerMulti.mainWindowHandle = MascotMakerMulti.GetActiveWindow();
-            }
+            // if (MascotMakerMulti.mainWindowHandle == IntPtr.Zero)
+            // {
+            //     Process currentProcess = Process.GetCurrentProcess();
+            //     MascotMakerMulti.SetForegroundWindow(currentProcess.Handle);
+            //     MascotMakerMulti.mainWindowHandle = MascotMakerMulti.GetActiveWindow();
+            // }
             this.cam = base.transform.GetComponent<Camera>();
             this.rend = base.transform.GetComponent<Renderer>();
             this.cam.clearFlags = CameraClearFlags.Color;
